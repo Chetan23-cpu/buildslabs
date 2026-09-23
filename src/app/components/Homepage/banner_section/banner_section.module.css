@@ -204,7 +204,23 @@
 }
 
 @media (max-width: 640px) {
+    /* .videosection is only 90% of .main's height (desktop base rule),
+       and .main's align-items:center splits that leftover 10% evenly -
+       5% above, 5% below - which reads as a black gap at both the top
+       and bottom of the video. Switching to flex-start pins the video
+       to the very top (removing just the top gap) and pushes all the
+       leftover space to the bottom instead. */
+    .main {
+        align-items: flex-start;
+    }
+
+    /* Desktop's width:95% (base rule, untouched) centers the video box
+       with a 5% gap on each side - since .main's background is also
+       black, that gap reads as invisible left/right padding around
+       the video rather than an obvious margin. width:100% here removes
+       it on mobile, so the video runs edge-to-edge. */
     .videosection {
+        width: 100%;
         padding: 16px;
         border-radius: 10px;
     }
