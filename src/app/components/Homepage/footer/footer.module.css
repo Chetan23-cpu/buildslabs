@@ -278,3 +278,19 @@
         align-items: flex-start;
     }
 }
+
+@media (max-width: 640px) {
+    /* .footer's side spacing comes from BOTH margin:50px (outer gap,
+       exposing the background video) and padding-left/right (inner
+       gap for content - already trimmed to 24px at the 900px tablet
+       tier above). Zeroing both here removes the side spacing
+       entirely on mobile, matching the other sections - only the
+       top/bottom margin is left, so the black footer box still floats
+       off the video above and below, just not left/right. */
+    .footer {
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
