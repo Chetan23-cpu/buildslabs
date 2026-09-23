@@ -155,7 +155,7 @@ const Industries = () => {
           </div>
           <div className={styles.card4}>
             <div className={styles.cardheading}>Andriod Application</div>
-            <div className={styles.cardcontent}>
+            <div className={styles.cardcontent4}>
               From customer-facing apps to powerful business solutions, we
               create scalable mobile experiences that perform reliably across
               devices.
@@ -177,7 +177,7 @@ const Industries = () => {
         <div className={styles.thirdRow}>
           <div className={styles.card5}>
             <div className={styles.cardheading}>Data Migration</div>
-            <div className={styles.cardcontent}>
+            <div className={styles.cardcontent5}>
               Migrate your business data between systems with accuracy, minimal
               disruption, and a clear transition process.
             </div>
@@ -372,7 +372,7 @@ const Industries = () => {
           </div>
           <div className={styles.card6}>
             <div className={styles.cardheading}>Data Analytics</div>
-            <div className={styles.cardcontent}>
+            <div className={styles.cardcontent6}>
               We turn raw business data into clear, actionable insights that
               help you understand performance and make better decisions.
             </div>
