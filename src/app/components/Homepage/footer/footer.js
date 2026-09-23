@@ -99,9 +99,11 @@ const Footer = () => {
                 <span className={styles.wordmark}>buildslabs</span>
               </div>
               <p className={styles.tagline}>
-                Strategy, design, and engineering.
+                Locations:
                 <br />
-                Built to ship.
+                Cork, Ireland
+                <br />
+                New Delhi, India
               </p>
             </div>
 
