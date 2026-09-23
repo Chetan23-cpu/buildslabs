@@ -1,0 +1,118 @@
+.trustedFooter {
+    position: relative;
+    padding: 40px 60px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background-color: black;/* dark background so white text stays readable */
+}
+
+.trustedText {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    padding-right: 24px;
+    padding-left: 20px;
+}
+
+.marquee {
+    flex: 1;
+    overflow: hidden;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+}
+
+.marqueeTrack {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    width: max-content;
+}
+.marqueeLogo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    padding: 4px 8px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    font-size: 35px;
+    height: 70px;
+    font-weight: 700;
+    width: 100px;
+    flex-shrink: 0;
+    /* background and color removed — now set per-icon via inline style */
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+    .trustedFooter {
+        padding: 32px 40px;
+        gap: 18px;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Same problem as the hero's trustedFooter: text + divider + a
+       flex:1 marquee side by side only works when there's enough
+       width to give the marquee real room. Below this width it
+       stacks - label on its own line, the icon strip scrolling full
+       width underneath - and the divider (nothing left to divide)
+       is dropped. */
+    .trustedFooter {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 20px;
+        gap: 12px;
+    }
+
+    .trustedText {
+        white-space: normal;
+        border-right: none;
+        padding: 0;
+        font-size: 13px;
+    }
+
+    .marquee {
+        width: 100%;
+    }
+
+    .marqueeTrack {
+        gap: 18px;
+    }
+
+    .marqueeLogo {
+        width: 64px;
+        height: 48px;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 400px) {
+    .marqueeLogo {
+        width: 54px;
+        height: 42px;
+        font-size: 19px;
+    }
+
+    .marqueeTrack {
+        gap: 14px;
+    }
+}

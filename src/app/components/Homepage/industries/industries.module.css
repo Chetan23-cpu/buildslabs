@@ -1,0 +1,780 @@
+.main {
+    width: 100%;
+    padding: 50px 20px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.heading {
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 60px;
+    color: white;
+}
+
+.title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #5E9DFE;
+    letter-spacing: 0.12em;
+}
+
+.subtitle {
+    font-size: 30px;
+    line-height: 1.6;
+}
+
+.firstRow, .secondRow, .thirdRow{
+    display: grid;
+    gap: 25px;
+    padding: 12.5px 40px;
+    width: 100%;
+    overflow: visible;
+}
+.firstRow{
+    grid-template-columns: 2fr 1fr;
+}
+.secondRow{
+    grid-template-columns: 1fr 2fr;
+}
+.thirdRow{
+    grid-template-columns: 1fr 1fr;
+}
+
+.card1, .card2, .card3, .card4, .card5, .card6{
+    border: 1px solid white;
+    height: 45vh;
+    border-radius: 10px;
+    padding: 30px 30px;
+    color: #2C2C2C;
+    transition: transform 0.3s ease;
+}
+
+.card1:hover, .card2:hover, .card3:hover, .card4:hover, .card5:hover, .card6:hover{
+    transform: translateY(-3px);
+}
+
+.card1{
+    position: relative;
+    overflow: visible;
+    background: linear-gradient(180deg, #E0F3FF 0%, #7FC3F0 100%);
+}
+.card2{
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #F5F6FE 0%, #8890E8 100%);
+}
+.card3{
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #F2FBE6 0%, #D3ECAF 100%);
+}
+
+/*
+  .card3Text keeps the heading/paragraph above the image (same pattern
+  as .card1Text) and caps its width so it never runs into the image's
+  corner.
+*/
+.card3Text {
+    position: relative;
+    z-index: 10;
+    max-width: 120%;
+}
+
+/*
+  The image is sized as a fraction of the card - 70% width, 55% height
+  - and pinned to the bottom-right corner (bottom:0; right:0) instead
+  of filling the whole card. That's what was hiding the text before:
+  `fill` with an inset:0 wrapper stretched the image over the ENTIRE
+  card, covering the text. .card3 still needs position:relative for
+  `fill` to size against - it just anchors to a smaller box now.
+*/
+.card3ImageWrap {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70%;
+    height: 60%;
+    border-radius: 14px 0 10px 0;
+    overflow: hidden;
+    z-index: 0;
+    box-sizing: border-box;
+    /* Same 5px padding as card4's wrap, so the gap between the video
+       frame and the card edge matches on both cards. */
+    padding: 20px;
+}
+
+.card3Image {
+    object-fit: cover;
+}
+
+/*
+  Same glass-frame treatment as card4's video, tinted from card3's own
+  gradient (#F2FBE6/#D3ECAF, the pale green background) instead of
+  card4's gold. .card3ImageWrap is already a fixed-size, fixed-position
+  box (70% x 55%, bottom-right corner) rather than a flex layout like
+  card4's wrap was, so this frame just fills 100% of that box - the
+  padding creates the glass gap all the way around the video, and the
+  video itself uses object-fit:cover (not contain) so it keeps filling
+  that corner box the way the original image did.
+*/
+.card3VideoFrame {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 6px;
+    border-radius: 14px 0 10px 0;
+    background: rgba(242, 251, 230, 0.25);
+    border: 1px solid rgba(242, 251, 230, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(150, 181, 110, 0.25);
+}
+
+.card3Video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.card4{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: linear-gradient(180deg, #FBF5DE 0%, #F0E4B8 100%);
+}
+.card5{
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #FBE8E8 0%, #F0BFBF 100%);
+}
+
+/* ---------- Card5 data-migration diagram ---------- */
+
+/*
+  Same "fill leftover space" technique as .card2display: .card5 is a
+  flex column (heading, content, then this row), so flex:1 here makes
+  the diagram fill and center in whatever room is left below the text.
+*/
+.card5display {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+  Everything here (circles, icons, label) is positioned with absolute
+  top/left PERCENTAGES that are the exact same coordinates used in the
+  SVG's viewBox="0 0 400 160" below (x% = x/400, y% = y/160). Since the
+  SVG uses preserveAspectRatio="none", it stretches to fill this box on
+  both axes independently - so a percentage position on a plain div
+  here lines up exactly with the matching point on the curve,
+  regardless of the box's actual rendered pixel size. aspect-ratio
+  keeps that 400:160 (2.5:1) proportion stable.
+*/
+.migrationDiagram {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 400 / 160;
+}
+
+.migrationArrows {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/*
+  ">" (direct child) on purpose: the flowing icons now live inside this
+  same <svg> too (via foreignObject), and a plain descendant selector
+  here was reaching into THEIR nested <path> elements as well, forcing
+  fill:none on every icon and stripping their color. Scoping to direct
+  children keeps this rule limited to the two actual arrow curves.
+*/
+.migrationArrows > path {
+    fill: none;
+    stroke: #8A8A8A;
+    stroke-width: 2;
+}
+
+.migrationArrows marker path {
+    fill: #8A8A8A;
+    stroke: none;
+}
+
+.dbCircle {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    color: #ffffff;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+}
+
+/*
+  Circle center is at x=15/400=3.75%, further out than the arcs'
+  actual start point (x=43) so the curve visibly emerges from the
+  circle's edge instead of its dead center.
+*/
+.dbCircleLeft {
+    left: 3.75%;
+    background: linear-gradient(160deg, #A9C1DE 0%, #6E8EB8 100%);
+}
+
+/* Mirrors the left circle: center at x=385/400=96.25%, arcs end at x=357 */
+.dbCircleRight {
+    left: 96.25%;
+    background: linear-gradient(160deg, #F3B27E 0%, #E0793A 100%);
+}
+
+.migrationLabel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #2C2C2C;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/*
+  These travel now (animateMotion + mpath in the JSX), so no static
+  position is set in CSS at all - .flowIcon just needs opacity:0 as a
+  starting point before its <animate> takes over, so there's no flash
+  of a fully-opaque icon sitting at the path's start before the first
+  animation frame runs.
+*/
+.flowIcon {
+    opacity: 0;
+}
+
+.migrationFlowIconInner {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #3B5E85;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.14);
+}
+.card6{
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #F5F6FE 0%, #8890E8 100%);
+}
+
+/*
+  Video sits absolutely inside .card6 (which needed position:relative +
+  overflow:hidden, added above). It's centered horizontally (left:50% +
+  translateX(-50%)) and pinned to the card's bottom edge (bottom:0),
+  then pushed down by translateY(30%) - a percentage transform is
+  relative to the ELEMENT'S OWN size, so shifting it down by 30% of its
+  own height tucks exactly the bottom 30% of the video under the card's
+  bottom edge, where .card6's overflow:hidden clips it away. That
+  leaves exactly the top 70% of the video visible, "sitting" on the
+  card's base.
+*/
+.card6VideoWrap {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 90%;
+    aspect-ratio: 16 / 9;
+    transform: translate(-50%, 40%);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card6Video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.cardcontent{
+    padding: 10px 0px;
+    width: 55%;
+    font-size: 16px;
+}
+.cardheading{
+    font-size: 20px;
+    font-weight: 700;
+}
+.cardcontent2{
+    padding: 10px 0px;
+    width: 75%;
+    font-size: 16px;
+}
+
+/* ---------- Card1 image stack (untouched — do not change) ---------- */
+
+.card1Text {
+    position: relative;
+    z-index: 10;
+    max-width: 32%;
+}
+
+.card1Text .cardcontent {
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.imageStack {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    padding: 0px 5px 5px 0px;
+}
+
+/*
+  Every mockup gets a WRAPPER with a fixed width + aspect-ratio, and the
+  <Image fill> inside it just covers that box (object-fit: cover in the
+  shared rule below). This is what actually controls the rendered size —
+  the source file's real pixel dimensions no longer matter, so a
+  portrait phone screenshot and a landscape laptop photo both end up the
+  size we tell them to be instead of fighting the layout.
+*/
+.cardBackWrap,
+.cardMiddleWrap,
+.cardFrontWrap {
+    position: absolute;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.cardBack,
+.cardMiddle,
+.cardFront {
+    object-fit: cover;
+}
+
+/*
+  No z-index on these wrappers on purpose: position:absolute + an explicit
+  z-index creates a new stacking context, which isolates mix-blend-mode
+  from the .card1 gradient behind it (blend-mode can only "see" elements
+  in the same stacking context). Leaving z-index at auto avoids that, and
+  stacking order instead just follows DOM order (back, then middle, then
+  front - already the order they're written in industries.js), which
+  gives the same visual layering without breaking the blend.
+*/
+
+/* Browser/laptop mockup - top right, bleeds past the top and right edges */
+.cardBackWrap {
+    top: 115px;
+    right: 0px;
+    bottom: -30px;
+    width: 45%;
+    aspect-ratio: 16 / 10;
+}
+
+.cardBack {
+    mix-blend-mode: multiply;
+}
+
+/* Tablet mockup - lower right, largest and most forward */
+.cardMiddleWrap {
+    bottom: 0%;
+    right: 33%;
+    width: 28%;
+    aspect-ratio: 4 / 3;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+}
+
+/* Phone mockup - bottom left, smallest, bleeds past the left and bottom edges */
+.cardFrontWrap {
+    bottom: 0%;
+    right: 565px;
+    width: 8%;
+    aspect-ratio: 9 / 19;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+}
+
+/* ---------- Card2 API orbit ---------- */
+
+/*
+  .card2 is a flex column (heading, content, then this row), so giving
+  .card2display flex:1 makes it fill all the leftover vertical space
+  below the text, and centering it there centers the orbit in whatever
+  room card2 actually has left - not a fixed pixel position.
+*/
+.card2display {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 200px;
+}
+
+/*
+  The orbit is a fixed-size square box. Every icon inside it is
+  positioned absolutely with top/left set to its exact center point,
+  then pulled back by 50% of its own size via transform so the
+  top/left coordinate really is its center - that's what let us place
+  6 icons at precise, evenly-spaced points around a circle.
+*/
+.orbit {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+/*
+  The wheel motion: this wrapper (spokes + icon bubbles) spins forever
+  around the box's own center. transform-origin is set to 100px 100px
+  - the center of the 200x200 box - which is also where every spoke
+  starts and what every .pos1..pos6 coordinate is measured from, so
+  the whole ring turns in place instead of swinging off-center.
+*/
+.orbitRing {
+    position: absolute;
+    inset: 0;
+    transform-origin: 100px 100px;
+    animation: orbitSpin 18s linear infinite;
+}
+
+@keyframes orbitSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/*
+  Counter-rotation: each icon bubble travels around the circle because
+  it's inside .orbitRing, but the glyph INSIDE it (the react-icon svg)
+  sits in this inner span, spinning the opposite direction at the same
+  speed. The two rotations cancel out, so the icon itself always stays
+  upright and vertically aligned no matter where it currently is on
+  the ring - only its position orbits, not its orientation.
+*/
+.orbitIconInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    animation: orbitCounterSpin 18s linear infinite;
+}
+
+@keyframes orbitCounterSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+/*
+  Dashed spokes from the center badge out to each icon. Drawn as an SVG
+  overlay sized to the same 200x200 box as the orbit (viewBox 0 0 200 200
+  maps 1:1 to pixels here), sitting behind the badge/icons in the DOM so
+  it doesn't need z-index to render underneath them.
+*/
+.orbitLines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.orbitLines line {
+    stroke: #4B4FBF;
+    stroke-width: 1.5;
+    stroke-dasharray: 4 4;
+    opacity: 0.45;
+}
+
+.centerlogo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #4B4FBF;
+    box-shadow: 0 10px 24px rgba(20, 33, 61, 0.2);
+    z-index: 2;
+}
+
+.orbitIcon {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    font-size: 18px;
+    color: #4B4FBF;
+    box-shadow: 0 8px 18px rgba(20, 33, 61, 0.16);
+    z-index: 1;
+}
+
+/*
+  6 positions, 60 degrees apart, on a circle of radius 95px centered
+  in the 200px orbit box (center point = 100,100). Computed with
+  x = cx + r*sin(angle), y = cy - r*cos(angle), angle measured
+  clockwise from the top (12 o'clock = 0deg).
+*/
+.pos1 { top: 5px;    left: 100px;  }  /* 12 o'clock */
+.pos2 { top: 52.5px; left: 182.3px; } /* 2 o'clock  */
+.pos3 { top: 147.5px; left: 182.3px; } /* 4 o'clock */
+.pos4 { top: 195px;  left: 100px;  }  /* 6 o'clock */
+.pos5 { top: 147.5px; left: 17.7px; }  /* 8 o'clock */
+.pos6 { top: 52.5px; left: 17.7px; }  /* 10 o'clock */
+
+/*
+  No fixed aspect-ratio here on purpose - that was the source of the
+  cropping. .card6VideoWrap uses aspect-ratio + object-fit:cover
+  because it WANTS a deliberate crop (only 70% of the video visible).
+  Here we want the opposite: zero cropping. So the wrapper only
+  constrains WIDTH (80%) and is pinned to the bottom, centered
+  horizontally; height is left to size itself off the video's own
+  intrinsic ratio (auto), so however wide 80% of the card is, the
+  video's height follows automatically and nothing gets clipped top,
+  bottom, left or right.
+*/
+/*
+  No position:absolute here on purpose - that's what was letting the
+  video overlap the text in the first place (an absolutely positioned
+  box ignores the normal flow and just stacks on top of whatever's
+  underneath it). .card4 is now a flex column (heading, content, then
+  this), so this wrap simply comes AFTER the text in normal document
+  flow and takes up its own space below it - there's no overlap to fix
+  with z-index because the two never occupy the same area to begin
+  with. flex:1 lets it fill whatever room is left under the text, and
+  margin:0 auto centers its fixed width within that space.
+*/
+.card4VideoWrap {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    min-height: 0;
+    padding: 5px;
+}
+
+
+/*
+  A "glass border" isn't something the border property alone can do -
+  border is just a flat-colored line, it can't blur what's behind it.
+  Real glass needs a distinct box with backdrop-filter, so this frame
+  wraps the video: a semi-transparent fill tinted from card4's own
+  gradient (#FBF5DE/#F0E4B8, the pale gold background), a soft
+  matching-tint border for the "edge highlight" glass look, and
+  backdrop-filter to blur whatever's behind it (the gradient itself,
+  visible through the padding gap around the video).
+*/
+.card4VideoFrame {
+    width: 50%;
+    padding: 6px;
+    border-radius: 12px;
+    background: rgba(251, 245, 222, 0.25);
+    border: 1px solid rgba(251, 245, 222, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(159, 153, 130, 0.25);
+    /* Nudges it past the wrap's own 5px padding, further into the corner */
+    margin: 0 -10px -10px 0;
+}
+
+.card4Video {
+    display: block;
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* =====================================================================
+   MOBILE / RESPONSIVE
+   Everything above this line is the desktop layout and is left as-is.
+   These breakpoints only override what actually breaks on narrower
+   screens: the 3 two-column grids collapse to one column, the fixed
+   45vh card height (fine on a wide short desktop viewport, way too
+   cramped or way too tall on a narrow phone one) becomes a fixed px
+   height instead so every absolutely-positioned / percentage-sized
+   child inside a card (card3's video box, card1's image stack, etc.)
+   still has a definite height to size itself against, and the few
+   spots that used fixed desktop pixel values instead of percentages
+   (card2's orbit push, card1's phone mockup offset) get scaled or
+   percentage-based overrides so they track the card's own width
+   instead of overflowing it.
+   ===================================================================== */
+
+@media (max-width: 1024px) {
+    /* .card2display's 200px left push exists to counterweight the
+       fixed 200px-wide .orbit sitting in a much wider desktop card;
+       once the card itself is narrower than that, the push just
+       shoves the orbit half off the card, so it's dropped here. */
+    .card2display {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    /* All three bento rows go from 2-column to a single stacked
+       column - at this width a 2fr/1fr split leaves the narrower
+       column too tight to hold its heading/paragraph/graphic. */
+    .firstRow, .secondRow, .thirdRow {
+        grid-template-columns: 1fr;
+        padding: 12.5px 20px;
+        gap: 18px;
+    }
+}
+
+@media (max-width: 640px) {
+    .main {
+        padding: 40px 16px;
+    }
+    .heading {
+        margin-bottom: 36px;
+    }
+    .title {
+        font-size: 12px;
+    }
+    .subtitle {
+        font-size: 22px;
+        line-height: 1.5;
+    }
+    .firstRow, .secondRow, .thirdRow {
+        padding: 0;
+        gap: 16px;
+    }
+
+    /* 45vh was sized for a short, wide desktop viewport. On a tall
+       narrow phone that's either a huge amount of near-empty space
+       (portrait) or a tiny strip that clips everything (landscape).
+       A fixed px height keeps things predictable AND keeps every
+       child below that uses height:% or position:absolute/inset
+       (card3's video box, card1's mockups, card6's video) working -
+       those all need the card to have a real, definite height rather
+       than "auto" to size themselves against. */
+    .card1, .card2, .card3, .card4, .card5, .card6 {
+        height: 380px;
+        padding: 22px;
+    }
+
+    .cardheading {
+        font-size: 18px;
+    }
+    .cardcontent, .cardcontent2 {
+        width: 100%;
+        font-size: 14px;
+    }
+    .card1Text {
+        max-width: 58%;
+    }
+    .card1Text .cardcontent {
+        font-size: 13px;
+    }
+
+    /* Card1 mockups: .cardMiddleWrap already used a percentage offset
+       (right: 33%) so it naturally scales with the card - only
+       .cardFrontWrap's "right: 565px" is a raw desktop pixel value,
+       tuned for a card several times wider than this one, so on a
+       380px-tall/narrow card it would push the phone mockup miles
+       off to the left, past the card's own edge. Swapping it for a
+       percentage (and nudging cardBackWrap's top down a bit for the
+       shorter card) keeps the same visual arrangement, just scaled. */
+    .cardBackWrap {
+        top: 65px;
+        width: 55%;
+    }
+    .cardMiddleWrap {
+        right: 22%;
+        width: 34%;
+    }
+    .cardFrontWrap {
+        right: 8%;
+        width: 15%;
+    }
+
+    /* The orbit's own internal layout (spokes, .pos1-.pos6) is all in
+       fixed px because it has to be - those coordinates are shared
+       with the SVG's viewBox="0 0 200 200" lines, and rewriting both
+       per breakpoint isn't worth it. Scaling the whole 200x200 box
+       down with transform keeps every internal coordinate correct
+       relative to each other; it just shrinks the end result. */
+    .orbit {
+        transform: scale(0.75);
+    }
+
+    .card3ImageWrap {
+        width: 62%;
+        height: 55%;
+        padding: 12px;
+    }
+
+    .card4VideoFrame {
+        width: 58%;
+    }
+
+    .migrationDiagram {
+        max-width: 300px;
+    }
+    .dbCircle {
+        width: 46px;
+        height: 46px;
+        font-size: 24px;
+    }
+    .migrationFlowIconInner {
+        width: 22px;
+        height: 22px;
+        font-size: 12px;
+    }
+    .migrationLabel {
+        font-size: 10px;
+    }
+
+    .card6VideoWrap {
+        width: 92%;
+    }
+}
+
+@media (max-width: 420px) {
+    .card1, .card2, .card3, .card4, .card5, .card6 {
+        height: 340px;
+        padding: 18px;
+    }
+    .subtitle {
+        font-size: 19px;
+    }
+    .orbit {
+        transform: scale(0.62);
+    }
+    .cardFrontWrap {
+        right: 4%;
+    }
+    .card1Text {
+        max-width: 62%;
+    }
+}

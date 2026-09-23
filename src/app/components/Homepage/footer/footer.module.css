@@ -1,0 +1,280 @@
+.footerWrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.bgVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.50) 0%,
+        rgba(0, 0, 0, 0.40) 10%,
+        rgba(0, 0, 0, 0.40) 20%,
+        rgba(0, 0, 0, 0.30) 30%,
+        rgba(0, 0, 0, 0.20) 40%,
+        rgba(0, 0, 0, 0.25) 50%,
+        rgba(0, 0, 0, 0.95) 100%
+    );
+    z-index: 1;
+}
+
+.footer {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.82);
+    padding: 96px 50px 32px;
+    margin: 50px;
+    border-radius: 20px;
+}
+
+.inner {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+
+.brandBlock {
+    max-width: 320px;
+    flex-shrink: 0;
+}
+
+.logoRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.logoMark {
+    border-radius: 8px;
+}
+
+.wordmark {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+}
+
+.tagline {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.columns {
+    display: flex;
+    gap: 64px;
+    flex-wrap: wrap;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    min-width: 140px;
+}
+
+.columnHeading {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 20px;
+}
+
+.linkList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0;
+    margin: 0;
+}
+
+.link {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.15s ease;
+}
+
+.link:hover {
+    color: #5e9dfe;
+}
+
+.badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #ffffff;
+    background: #5e9dfe;
+    padding: 2px 8px;
+    border-radius: 999px;
+    line-height: 1.6;
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.12);
+    margin: 64px 0 40px;
+}
+
+.newsletterRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.newsletterCopy {
+    max-width: 420px;
+}
+
+.newsletterLabel {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 10px;
+}
+
+.newsletterHeading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+.newsletterForm {
+    display: flex;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 6px 6px 6px 18px;
+    align-items: center;
+    min-width: 380px;
+}
+
+.emailInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 10px 0;
+}
+
+.emailInput::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.subscribeButton {
+    background: #5e9dfe;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s ease;
+}
+
+.subscribeButton:hover {
+    background: #4a86e8;
+}
+
+.confirmedText {
+    font-size: 15px;
+    color: #5e9dfe;
+    font-weight: 500;
+}
+
+.disclaimer {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 12px;
+}
+
+.bottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.copyright {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.legalLinks {
+    display: flex;
+    gap: 24px;
+}
+
+.legalLink {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.legalLink:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 900px) {
+    .footer {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .top {
+        gap: 48px;
+    }
+
+    .columns {
+        gap: 40px;
+    }
+
+    .newsletterForm {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .newsletterRow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

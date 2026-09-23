@@ -1,0 +1,474 @@
+.main{
+    background-color: black;
+    width: 100%;
+}
+.section {
+    border: 1px solid transparent;
+    margin-top: 50px;
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-bottom: 50px;
+    padding:50px;
+    border-radius: 20px;
+    background:
+        linear-gradient(#000000, #000000) padding-box,
+        linear-gradient(160deg, #FFB3B3 0%, #FFCB91 50%, #FFEC9E 100%) border-box;
+}
+
+.inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 80px;
+    align-items: start;
+}
+
+/* ---------- Left column: testimonial + scrolling stat cards ---------- */
+
+.left {
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0;
+}
+
+.quote {
+    font-size: 32px;
+    line-height: 1.35;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 32px;
+    max-width: 560px;
+}
+
+/* ---------- Horizontal scrolling stat cards ---------- */
+
+.cardGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    min-height: 420px;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.cardRow {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.cardTrack {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: max-content;
+}
+
+.statCard {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+    width: 220px;
+}
+
+.cardValue {
+    font-size: 32px;
+    font-weight: 800;
+    color: #5E9DFE;
+    line-height: 1;
+}
+
+.cardDivider {
+    width: 32px;
+    height: 2px;
+    background: rgba(94, 157, 254, 0.4);
+}
+
+.cardTitle {
+    font-size: 15px;
+    font-weight: 700;
+    color: #14213D;
+}
+
+.cardDesc {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #6B7280;
+    margin: 0;
+}
+
+/* ---------- Bottom stats row ---------- */
+
+.statsRow {
+    display: flex;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 32px;
+    margin-top: 32px;
+}
+
+.statBlock {
+    flex: 1;
+    padding-right: 24px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.statBlock:last-child {
+    border-right: none;
+    padding-right: 0;
+}
+
+.statValue {
+    display: block;
+    font-size: 40px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+}
+
+.statLabel {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 8px;
+    line-height: 1.4;
+}
+
+/* ---------- Right column: quote card ---------- */
+
+.right {
+    background: linear-gradient(160deg, #FFB3B3 0%, #FFCB91 50%, #FFEC9E 100%);
+    border-radius: 28px;
+    padding: 40px;
+}
+
+.tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    color: #14213D;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 24px;
+    border-radius: 14px;
+    margin-bottom: 32px;
+}
+
+.tabIcon {
+    font-size: 16px;
+}
+
+.heading {
+    font-size: 34px;
+    font-weight: 800;
+    color: #14213D;
+    margin: 0 0 10px;
+}
+
+.subheading {
+    font-size: 15px;
+    color: rgba(20, 33, 61, 0.85);
+    margin: 0 0 28px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 32px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #14213D;
+}
+
+.required {
+    color: #5E9DFE;
+}
+
+.input,
+.select,
+.textarea {
+    background: #F3F5F8;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 13px 14px;
+    font-size: 14px;
+    color: #14213D;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #9AA1AC;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    border-color: #5E9DFE;
+    background: #ffffff;
+}
+
+.select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+.agreeRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #5E9DFE;
+    margin-top: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.agreeText {
+    font-size: 13px;
+    color: #6B7280;
+    line-height: 1.5;
+}
+
+.legalLink {
+    color: #5E9DFE;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.legalLink:hover {
+    text-decoration: underline;
+}
+
+.submitButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+   background: linear-gradient(160deg, #FFD6D6 0%, #FFE3C2 50%, #FFF6C9 100%);
+    color: #14213D;;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.submitButton:hover {
+    background: linear-gradient(160deg, #FFB3B3 0%, #FFCB91 50%, #FFEC9E 100%);
+}
+
+.submitArrow {
+    font-size: 18px;
+}
+
+.confirmedState {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.confirmedTitle {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #14213D;
+    margin-bottom: 8px;
+}
+
+.confirmedText {
+    font-size: 15px;
+    color: #6B7280;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+    /* The 60px side margins + 50px padding were sized for a desktop
+       section that's already 1000px+ wide - on a tablet those two
+       numbers alone eat 220px of width before any content starts.
+       Scaling both down keeps the card's proportions but stops it
+       from squeezing the grid below. */
+    .section {
+        margin-left: 32px;
+        margin-right: 32px;
+        padding: 36px;
+    }
+
+    .inner {
+        grid-template-columns: 1fr;
+        gap: 56px;
+    }
+
+    .quote {
+        font-size: 26px;
+    }
+
+    .cardGrid {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Same reasoning as the 1024px step, taken further: on a phone
+       the original 60px/50px combo would leave barely 200-250px of
+       usable width. */
+    .section {
+        margin: 30px 16px;
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+
+    .quote {
+        font-size: 22px;
+        margin-bottom: 24px;
+    }
+
+    .cardGrid {
+        min-height: 260px;
+        gap: 14px;
+    }
+
+    .statCard {
+        width: 170px;
+        padding: 18px;
+    }
+
+    .cardValue {
+        font-size: 26px;
+    }
+
+    .statsRow {
+        flex-wrap: wrap;
+        gap: 20px 0;
+        padding-top: 24px;
+        margin-top: 24px;
+    }
+
+    .statBlock {
+        flex: 1 1 45%;
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .statValue {
+        font-size: 30px;
+    }
+
+    .row {
+        grid-template-columns: 1fr;
+    }
+
+    .right {
+        padding: 24px;
+        border-radius: 20px;
+    }
+
+    .tab {
+        padding: 11px 18px;
+        font-size: 13px;
+        margin-bottom: 24px;
+    }
+
+    .heading {
+        font-size: 24px;
+    }
+
+    .subheading {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .form {
+        gap: 18px;
+    }
+
+    /* Bumped up from the desktop 13px/14px - 44px is the usual
+       minimum comfortable touch-target height, and the desktop
+       padding alone lands closer to 40px. */
+    .input,
+    .select,
+    .textarea {
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    .submitButton {
+        padding: 15px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .section {
+        margin: 24px 12px;
+        padding: 20px 16px;
+    }
+
+    .quote {
+        font-size: 19px;
+    }
+
+    .statCard {
+        width: 150px;
+    }
+
+    .statBlock {
+        flex: 1 1 100%;
+    }
+
+    .heading {
+        font-size: 21px;
+    }
+}

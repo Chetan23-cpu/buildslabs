@@ -1,0 +1,305 @@
+.main {
+    width: 100%;
+    height: 100vh;
+    /* dvh accounts for the mobile browser chrome (address bar) showing
+       and hiding as you scroll - plain 100vh is measured against the
+       LARGEST possible viewport, so on iOS/Android that overshoots the
+       visible area on first paint and the page jumps/resizes under you.
+       Declared after vh so it only overrides where supported, with vh
+       as the fallback for anything that doesn't understand dvh. */
+    height: 100dvh;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.videosection {
+    position: relative;
+    display: flex;
+    width: 95%;
+    height: 90%;
+    padding: 20px 30px;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.25) 0%,
+        rgba(0, 0, 0, 0.65) 50%,
+        rgba(0, 0, 0, 0.95) 100%
+    );
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+}
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    z-index: 2;
+}
+
+.ctaButton {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 2;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 999px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #275272, #1a3b52);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.trustedFooter {
+    position: absolute;
+    bottom: 24px;
+    left: 30px;
+    right: 30px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.trustedText {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    padding-right: 24px;
+    padding-left: 20px;
+}
+
+.marquee {
+    flex: 1;
+    overflow: hidden;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+}
+
+.marqueeTrack {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    width: max-content;
+    animation: scrollLeft 25s linear infinite;
+}
+
+/* .marqueeLogo {
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    flex-shrink: 0;
+} */
+
+@keyframes scrollLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.marqueeLogo {
+    object-fit: contain;
+    opacity: 0.9;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 6px;
+    padding: 4px 8px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+.marqueeLogo[alt="Blue Tokai"] {
+    transform: scale(1.23);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+    .title {
+        font-size: 2.25rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .videosection {
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    /* Logo and CTA are both absolutely positioned at top-left/top-right
+       at their desktop size (200px logo + a padded pill button) - on a
+       ~360px-wide card those two alone are wider than the viewport and
+       start overlapping. Shrinking the logo and tightening the button's
+       padding/font keeps both readable with real space between them. */
+    .logo {
+        top: 14px;
+        left: 14px;
+    }
+
+    .logoImg {
+        width: 120px;
+        height: auto;
+    }
+
+    .ctaButton {
+        top: 14px;
+        right: 14px;
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .content {
+        padding: 0 16px;
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: 1.6rem;
+        margin-bottom: 14px;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    /* The text+divider+marquee row was designed for a wide desktop
+       footer strip; on mobile there isn't room to keep them side by
+       side without squashing the marquee to nothing, so it stacks:
+       the "Trusted by" line on its own row, logos scrolling in a full-
+       width row underneath. */
+    .trustedFooter {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .trustedText {
+        white-space: normal;
+        border-right: none;
+        padding-right: 0;
+        padding-left: 0;
+        font-size: 12px;
+    }
+
+    .marquee {
+        width: 100%;
+    }
+
+    .marqueeTrack {
+        gap: 28px;
+    }
+
+    .marqueeLogo {
+        transform: scale(0.85);
+    }
+
+    .marqueeLogo[alt="Blue Tokai"] {
+        transform: scale(1.05);
+    }
+}
+
+@media (max-width: 400px) {
+    .title {
+        font-size: 1.35rem;
+    }
+
+    .subtitle {
+        font-size: 0.85rem;
+    }
+
+    .logoImg {
+        width: 100px;
+    }
+
+    .ctaButton {
+        padding: 7px 12px;
+        font-size: 11px;
+    }
+}
