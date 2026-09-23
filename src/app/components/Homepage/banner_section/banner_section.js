@@ -67,6 +67,23 @@ const BannerSection = () => {
         window.lenis?.resize()
     }
 
+    // Scrolls to the quote/contact form section (id="quote-section",
+    // set on QuoteSection's root). Goes through window.lenis.scrollTo
+    // when Lenis smooth-scroll is active, since calling the native
+    // scrollIntoView while Lenis is running fights it and produces a
+    // janky/incorrect scroll - Lenis needs to be the one driving it.
+    // Falls back to plain scrollIntoView if Lenis isn't present.
+    const handleScheduleCall = () => {
+        const target = document.getElementById("quote-section")
+        if (!target) return
+
+        if (window.lenis) {
+            window.lenis.scrollTo(target)
+        } else {
+            target.scrollIntoView({ behavior: "smooth" })
+        }
+    }
+
     return (
         <div className={styles.main}>
             <div className={styles.videosection}>
@@ -94,7 +111,7 @@ const BannerSection = () => {
                     />
                 </div>
 
-                <button className={styles.ctaButton}>
+                <button className={styles.ctaButton} onClick={handleScheduleCall}>
                     Schedule a call
                 </button>
 

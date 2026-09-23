@@ -112,7 +112,7 @@ const QuoteSection = () => {
   };
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} id="quote-section">
       <section className={styles.section}>
         <div className={styles.inner}>
           <div className={styles.left}>
