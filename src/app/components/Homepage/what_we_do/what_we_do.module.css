@@ -256,8 +256,14 @@
         line-height: 1.5;
     }
 
+    /* Centers the name + description block vertically within whatever
+       leftover space is below the image, instead of it sitting glued
+       to the top. Text stays left-aligned horizontally (that's just
+       the default for block text - justify-content only affects the
+       vertical axis here since .cardBody is a column flex container). */
     .cardBody {
         padding: 18px 20px;
+        justify-content: center;
     }
 
     .name {
