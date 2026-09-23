@@ -103,7 +103,7 @@
 .imageWrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 18 / 9; /* match your .webp files' actual ratio */
+    aspect-ratio: 16 / 9; /* match your .webp files' actual ratio */
     flex-shrink: 0;
     background: #E2E8F0;
 }
@@ -117,6 +117,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-height: 0;
 }
 
 .logoRow {
@@ -207,29 +208,28 @@
 
 @media (max-width: 768px) {
     /*
-      Why the image:text ratio was drifting on mobile:
-      .carousel/.track/.card all used a FIXED height:600px regardless
-      of card width. .imageWrap has no fixed height of its own - its
-      height comes from aspect-ratio:15/9 applied to whatever width the
-      card actually is. So when .card shrank to 90vw on a phone, the
-      image got shorter (following its aspect-ratio), but the card
-      stayed exactly 600px tall - meaning the image's SHARE of the
-      card's height shrank while .cardBody (flex:1, "whatever's left
-      over") silently grew to fill the difference. Visually: less
-      image, more empty-feeling text area, even though nothing about
-      the text itself changed.
+      Previous attempt locked the card's total height to the desktop
+      width:height RATIO (aspect-ratio: 700/600), which kept image and
+      text proportional to each other - but it didn't account for how
+      much actual text each project has. Several descriptions (Hotel
+      management, Inventory/Production, CRM, etc.) are 2-3 sentences
+      long, and a strictly-proportional card on a narrow phone simply
+      doesn't have enough vertical room for them - the text was
+      overflowing past the card's rounded bottom edge.
 
-      Fix: instead of a fixed 600px, .carousel now sizes itself off
-      aspect-ratio:700/600 - the exact width:height ratio the desktop
-      card already uses. Because that's a RATIO instead of a fixed
-      number, the card's total height now shrinks in the same
-      proportion as its width does, so the image keeps the same % of
-      the card's height at every width - the split between image and
-      text stays identical to desktop, it just scales down.
+      Fix combines two things:
+      1. height: clamp(460px, 95vw, 640px) - still responsive to
+         viewport width like before, but with a FLOOR (460px) so
+         .cardBody always keeps enough room for text even on the
+         narrowest phones, and a CEILING (640px) so it doesn't balloon
+         on tablets. This replaces the strict aspect-ratio approach.
+      2. .description below gets a 4-line clamp with ellipsis, so no
+         matter how long a project's text is, it hard-stops at 4 lines
+         and can never push past the card's edge - the box's content
+         is now guaranteed to fit, not just usually fit.
     */
     .carousel {
-        height: auto;
-        aspect-ratio: 700 / 600;
+        height: clamp(460px, 95vw, 640px);
     }
 
     .card {
@@ -257,15 +257,29 @@
     }
 
     .cardBody {
-        padding: 20px 22px;
+        padding: 18px 20px;
     }
 
     .name {
-        font-size: 18px;
+        font-size: 17px;
+        line-height: 1.3;
     }
 
+    .logoRow {
+        margin-bottom: 8px;
+    }
+
+    /* Hard line-clamp: caps every description at 4 lines with an
+       ellipsis, regardless of how long the source text is. This is
+       what actually guarantees the text can never overflow the card,
+       on top of the extra height budget above. */
     .description {
-        font-size: 14px;
+        font-size: 13.5px;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     .tag {
@@ -302,6 +316,7 @@
 
     .description {
         font-size: 13px;
+        -webkit-line-clamp: 4;
     }
 
     .subtitle {
