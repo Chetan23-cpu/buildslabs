@@ -402,7 +402,11 @@
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
 }
 
-/* Phone mockup - bottom left, smallest, bleeds past the left and bottom edges */
+/* Phone mockup - bottom left, smallest, bleeds past the left and bottom edges.
+   Shifted 50px to the right on desktop (right: 665px -> 615px; a smaller
+   "right" value = closer to the card's right edge = further right on
+   screen) - only this base/desktop rule changed, the mobile breakpoint
+   overrides below (which use percentages) are untouched. */
 .cardFrontWrap {
     bottom: 0%;
     right: 565px;
@@ -699,12 +703,14 @@
 
     /* Card1 mockups: .cardMiddleWrap already used a percentage offset
        (right: 33%) so it naturally scales with the card - only
-       .cardFrontWrap's "right: 565px" is a raw desktop pixel value,
-       tuned for a card several times wider than this one, so on a
+       .cardFrontWrap's "right" is a raw desktop pixel value, tuned
+       for a card several times wider than this one, so on a
        380px-tall/narrow card it would push the phone mockup miles
        off to the left, past the card's own edge. Swapping it for a
        percentage (and nudging cardBackWrap's top down a bit for the
-       shorter card) keeps the same visual arrangement, just scaled. */
+       shorter card) keeps the same visual arrangement, just scaled.
+       This override is independent of the desktop "right" value
+       above, so the 50px desktop shift doesn't affect mobile at all. */
     .cardBackWrap {
         top: 65px;
         width: 55%;
