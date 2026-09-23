@@ -760,7 +760,8 @@
         right: auto;
         left: 50%;
         transform: translateX(-50%);
-        width: 34%;
+        /* 34% increased by 40% (34 * 1.4 ≈ 47.6%, rounded to 48%) */
+        width: 48%;
     }
 
     /* The orbit's own internal layout (spokes, .pos1-.pos6) is all in
@@ -837,15 +838,17 @@
         font-size: 10px;
     }
 
-    /* card6VideoWrap: mobile-only version of removing the deliberate
-       bottom-crop (desktop keeps translate(-50%, 40%) + bottom:0,
-       cropping the video flush to the edge, untouched above). Here the
-       full video is shown, centered horizontally, with a real 16px gap
-       above the card's bottom edge instead of bleeding past it. */
+    /* card6VideoWrap, mobile: back to the crop approach (like desktop,
+       but 30% instead of 40%) rather than the full-video-with-gap
+       version from before. bottom:0 pins it to the card's bottom edge,
+       and translate(-50%, 30%) pushes it down by 30% of its OWN
+       height - .card6's overflow:hidden (set on the base rule, not
+       touched here) clips off whatever falls past the card's bottom
+       edge, so the lower 30% of the video stays hidden. */
     .card6VideoWrap {
         width: 92%;
-        bottom: 16px;
-        transform: translateX(-50%);
+        bottom: 0;
+        transform: translate(-50%, 30%);
     }
 }
 
