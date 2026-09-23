@@ -648,6 +648,11 @@
    (card2's orbit push, card1's phone mockup offset) get scaled or
    percentage-based overrides so they track the card's own width
    instead of overflowing it.
+
+   Text-width and video/graphic-centering changes for card2, card3,
+   card4, card5 and card6 (text at 100% width; graphic centered
+   horizontally with bottom padding/gap) live ONLY in this section -
+   the desktop rules above are untouched.
    ===================================================================== */
 
 @media (max-width: 1024px) {
@@ -690,6 +695,19 @@
         gap: 16px;
     }
 
+    /* .firstRow/.secondRow/.thirdRow are three SEPARATE grid
+       containers stacked inside .main (a flex column) - the gap:16px
+       above only creates space BETWEEN cards inside each grid (card1↔
+       card2, card3↔card4, card5↔card6). Nothing was creating space
+       between the rows themselves, so card2 sat flush against card3,
+       and card4 flush against card5. margin-bottom on the first two
+       rows matches that same 16px, so every gap - within a row and
+       between rows - is now identical. (thirdRow doesn't need one:
+       there's no row after it.) */
+    .firstRow, .secondRow {
+        margin-bottom: 16px;
+    }
+
     /* 45vh was sized for a short, wide desktop viewport. On a tall
        narrow phone that's either a huge amount of near-empty space
        (portrait) or a tiny strip that clips everything (landscape).
@@ -706,38 +724,43 @@
     .cardheading {
         font-size: 18px;
     }
+    /* This rule already covers card2 AND card3 (they share
+       .cardcontent2) - both were already meant to be full-width on
+       mobile, so no separate scoping is needed here the way it was on
+       desktop. cardcontent4/5/6 are added below since they weren't
+       included before. */
     .cardcontent, .cardcontent2 {
         width: 100%;
         font-size: 14px;
     }
+    .cardcontent4, .cardcontent5, .cardcontent6 {
+        width: 100%;
+        font-size: 14px;
+    }
     .card1Text {
-        max-width: 58%;
+        max-width: 100%;
     }
     .card1Text .cardcontent {
         font-size: 13px;
     }
 
-    /* Card1 mockups: .cardMiddleWrap already used a percentage offset
-       (right: 33%) so it naturally scales with the card - only
-       .cardFrontWrap's "right" is a raw desktop pixel value, tuned
-       for a card several times wider than this one, so on a
-       380px-tall/narrow card it would push the phone mockup miles
-       off to the left, past the card's own edge. Swapping it for a
-       percentage (and nudging cardBackWrap's top down a bit for the
-       shorter card) keeps the same visual arrangement, just scaled.
-       This override is independent of the desktop "right" value
-       above, so the 50px desktop shift doesn't affect mobile at all. */
-    .cardBackWrap {
-        top: 65px;
-        width: 55%;
+    /* Card1 mockups, mobile only: the laptop (.cardBackWrap) and phone
+       (.cardFrontWrap) mockups are hidden entirely, leaving just the
+       tablet (.cardMiddleWrap). Since it's now the only mockup left,
+       it's centered horizontally in the card instead of offset toward
+       the right edge - left:50% + translateX(-50%) replaces the old
+       right:22% positioning. Vertical placement (bottom:0%, inherited
+       from the desktop base rule) is left as-is, as requested. Desktop
+       (all three mockups, original positions) is untouched above. */
+    .cardBackWrap,
+    .cardFrontWrap {
+        display: none;
     }
     .cardMiddleWrap {
-        right: 22%;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
         width: 34%;
-    }
-    .cardFrontWrap {
-        right: 8%;
-        width: 15%;
     }
 
     /* The orbit's own internal layout (spokes, .pos1-.pos6) is all in
@@ -750,14 +773,51 @@
         transform: scale(0.75);
     }
 
+    /* card2display: mobile-only version of the flex-end + bottom-gap
+       treatment applied to card4/card5's graphics, so the orbit sits
+       low with a deliberate gap instead of dead-centered vertically.
+       Desktop's align-items:center is untouched above. */
+    .card2display {
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 16px;
+    }
+
+    /* card3ImageWrap: desktop's bottom:0/right:0 corner-anchor still
+       applies unless overridden here. left:50% + translateX(-50%)
+       centers it horizontally (matching card4's video), and bottom:16px
+       gives it a gap instead of sitting flush against the card edge. */
     .card3ImageWrap {
         width: 62%;
         height: 55%;
         padding: 12px;
+        right: auto;
+        left: 50%;
+        bottom: 16px;
+        transform: translateX(-50%);
     }
 
+    /* card4VideoWrap/Frame: mobile-only horizontal centering (desktop
+       stays right-aligned via justify-content:flex-end above) plus a
+       deliberate bottom gap instead of the 5px uniform padding. The
+       desktop corner-nudge margin is cancelled out here since it no
+       longer makes sense once the video is centered instead of
+       right-aligned. */
+    .card4VideoWrap {
+        justify-content: center;
+        padding: 5px 5px 20px 5px;
+    }
     .card4VideoFrame {
         width: 58%;
+        margin: 0;
+    }
+
+    /* card5display: same flex-end + bottom-gap treatment as card2,
+       mobile-only. Desktop's align-items:center stays untouched above. */
+    .card5display {
+        align-items: flex-end;
+        justify-content: center;
+        padding-bottom: 16px;
     }
 
     .migrationDiagram {
@@ -777,8 +837,15 @@
         font-size: 10px;
     }
 
+    /* card6VideoWrap: mobile-only version of removing the deliberate
+       bottom-crop (desktop keeps translate(-50%, 40%) + bottom:0,
+       cropping the video flush to the edge, untouched above). Here the
+       full video is shown, centered horizontally, with a real 16px gap
+       above the card's bottom edge instead of bleeding past it. */
     .card6VideoWrap {
         width: 92%;
+        bottom: 16px;
+        transform: translateX(-50%);
     }
 }
 
@@ -793,10 +860,7 @@
     .orbit {
         transform: scale(0.62);
     }
-    .cardFrontWrap {
-        right: 4%;
-    }
     .card1Text {
-        max-width: 62%;
+        max-width: 100%;
     }
 }

@@ -237,6 +237,17 @@
         height: 100%;
     }
 
+    /* Image was sized purely off aspect-ratio:16/9, which happened to
+       land close to a 50/50 split against .cardBody's leftover space -
+       not a deliberate ratio. Setting an explicit height:60% here (and
+       turning the aspect-ratio off so it doesn't fight this) locks the
+       image to exactly 60% of the card's total height; .cardBody stays
+       flex:1, so it automatically fills the remaining 40% below it. */
+    .imageWrap {
+        height: 60%;
+        aspect-ratio: unset;
+    }
+
     .left, .right {
         opacity: 0;
         pointer-events: none;
