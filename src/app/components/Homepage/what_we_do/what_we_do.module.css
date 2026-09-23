@@ -191,9 +191,50 @@
     box-shadow: 0 8px 20px rgba(20, 33, 61, 0.2);
 }
 
+/* =====================================================================
+   MOBILE / RESPONSIVE
+   ===================================================================== */
+
+@media (max-width: 900px) {
+    .main {
+        padding: 40px 16px;
+    }
+
+    .heading {
+        margin-bottom: 40px;
+    }
+}
+
 @media (max-width: 768px) {
+    /*
+      Why the image:text ratio was drifting on mobile:
+      .carousel/.track/.card all used a FIXED height:600px regardless
+      of card width. .imageWrap has no fixed height of its own - its
+      height comes from aspect-ratio:15/9 applied to whatever width the
+      card actually is. So when .card shrank to 90vw on a phone, the
+      image got shorter (following its aspect-ratio), but the card
+      stayed exactly 600px tall - meaning the image's SHARE of the
+      card's height shrank while .cardBody (flex:1, "whatever's left
+      over") silently grew to fill the difference. Visually: less
+      image, more empty-feeling text area, even though nothing about
+      the text itself changed.
+
+      Fix: instead of a fixed 600px, .carousel now sizes itself off
+      aspect-ratio:700/600 - the exact width:height ratio the desktop
+      card already uses. Because that's a RATIO instead of a fixed
+      number, the card's total height now shrinks in the same
+      proportion as its width does, so the image keeps the same % of
+      the card's height at every width - the split between image and
+      text stays identical to desktop, it just scales down.
+    */
+    .carousel {
+        height: auto;
+        aspect-ratio: 700 / 600;
+    }
+
     .card {
         width: 90vw;
+        height: 100%;
     }
 
     .left, .right {
@@ -201,7 +242,69 @@
         pointer-events: none;
     }
 
+    /* .title (the small "INDUSTRIES WE SERVE" eyebrow label, 13px on
+       desktop) previously jumped to 2rem/32px here - almost certainly
+       a leftover typo, since it made the small uppercase label bigger
+       than the actual heading below it. Sized in line with the rest
+       of the eyebrow labels across the other sections instead. */
     .title {
-        font-size: 2rem;
+        font-size: 12px;
+    }
+
+    .subtitle {
+        font-size: 22px;
+        line-height: 1.5;
+    }
+
+    .cardBody {
+        padding: 20px 22px;
+    }
+
+    .name {
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .tag {
+        font-size: 11px;
+        padding: 6px 14px;
+        top: 12px;
+        left: 12px;
+    }
+
+    .navButton {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .controls {
+        margin-top: 28px;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 94vw;
+    }
+
+    .cardBody {
+        padding: 16px 18px;
+    }
+
+    .name {
+        font-size: 16px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    .subtitle {
+        font-size: 19px;
     }
 }
