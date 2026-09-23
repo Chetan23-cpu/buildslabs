@@ -103,7 +103,7 @@
 .imageWrap {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9; /* match your .webp files' actual ratio */
+    aspect-ratio: 18 / 9; /* match your .webp files' actual ratio */
     flex-shrink: 0;
     background: #E2E8F0;
 }
