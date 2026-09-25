@@ -19,7 +19,7 @@
     display: flex;
     width: 95%;
     height: 90%;
-    padding: 20px 30px;
+    padding: 10px 20px;
     background-color: black;
     align-items: center;
     justify-content: center;
@@ -48,8 +48,8 @@
     height: 100%;
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.25) 0%,
-        rgba(0, 0, 0, 0.65) 50%,
+        rgba(0, 0, 0, 0.10) 0%,
+        rgba(0, 0, 0, 0.45) 50%,
         rgba(0, 0, 0, 0.95) 100%
     );
     z-index: 1;

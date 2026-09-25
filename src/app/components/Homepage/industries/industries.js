@@ -26,7 +26,7 @@ const Industries = () => {
         <div className={styles.firstRow}>
           <div className={styles.card1}>
             <div className={styles.card1Text}>
-              <div className={styles.cardheading}>UI/UX</div>
+              <div className={`${styles.cardheading} ${styles.cardheading1}`}>UI/UX</div>
               <div className={styles.cardcontent}>
                 We design intuitive, user-focused interfaces that make complex
                 systems simple and easy to navigate. From user journeys to
@@ -47,7 +47,7 @@ const Industries = () => {
               <div className={styles.cardMiddleWrap}>
                 <Image
                   src="/ui_ux/card1_tablet.webp"
-                  alt=""
+                  alt="" 
                   fill
                   sizes="300px"
                   className={styles.cardMiddle}
@@ -66,7 +66,7 @@ const Industries = () => {
           </div>
 
           <div className={styles.card2}>
-            <div className={styles.cardheading}>API Integration</div>
+            <div className={`${styles.cardheading} ${styles.cardheading2}`}>API Integration</div>
             <div className={styles.cardcontent2}>
               Connect your applications, platforms, and third-party services
               through secure and reliable API integrations.
@@ -134,7 +134,7 @@ const Industries = () => {
         <div className={styles.secondRow}>
           <div className={styles.card3}>
             <div className={styles.card3Text}>
-              <div className={styles.cardheading}>Custom Web App</div>
+              <div className={`${styles.cardheading} ${styles.cardheading3}`}>Custom Web App</div>
               <div className={styles.cardcontent2}>
                 Build custom web applications tailored to your unique business
                 processes, workflows, and requirements.
@@ -154,7 +154,7 @@ const Industries = () => {
             </div>
           </div>
           <div className={styles.card4}>
-            <div className={styles.cardheading}>Andriod Application</div>
+            <div className={`${styles.cardheading} ${styles.cardheading4}`}>Andriod Application</div>
             <div className={styles.cardcontent4}>
               From customer-facing apps to powerful business solutions, we
               create scalable mobile experiences that perform reliably across
@@ -176,7 +176,7 @@ const Industries = () => {
         </div>
         <div className={styles.thirdRow}>
           <div className={styles.card5}>
-            <div className={styles.cardheading}>Data Migration</div>
+            <div className={`${styles.cardheading} ${styles.cardheading5}`}>Data Migration</div>
             <div className={styles.cardcontent5}>
               Migrate your business data between systems with accuracy, minimal
               disruption, and a clear transition process.
@@ -371,7 +371,7 @@ const Industries = () => {
             </div>
           </div>
           <div className={styles.card6}>
-            <div className={styles.cardheading}>Data Analytics</div>
+            <div className={`${styles.cardheading} ${styles.cardheading6}`}>Data Analytics</div>
             <div className={styles.cardcontent6}>
               We turn raw business data into clear, actionable insights that
               help you understand performance and make better decisions.
